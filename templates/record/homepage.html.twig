@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Vinyl Records App{% endblock %}</title>
+    <link href= "https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="alert alert-primary text-center p-5" role="alert">
+    <h1>Vinyl Records</h1>
+    <button class="btn btn-primary" data-target="#addRecordModal" data-toggle="modal">Add Record</button>
+</div>
+</body>
+</html>
+
+<div>
+    The album has  {{ numberOfSongs * 100 }} songs !
+
+    {% if numberOfSongs > 30 %}
+
+        <p> Naah, that's too many songs</p>
+
+    {% endif %}
+</div>
+
+<div>
+    <h2>Album of the day</h2>
+    <table>
+       <tr>
+           <th>Name</th>
+           <td>{{ myAlbum.name }}</td>
+       </tr>
+        <tr>
+            <th>Artist</th>
+            <td>{{ myAlbum.artist|lower|upper }}</td>
+        </tr>
+        <tr>
+            <th>Likes</th>
+            <td>{{ myAlbum.likes }}</td>
+        </tr>
+        <tr>
+            <th>Favourite track  </th>
+            <td>{{ myAlbum.favouriteTrack }}</td>
+        </tr>
+
+    </table>
+</div>
+{% endblock %}
+
+{# Connect the database to the homepage so that the images can be displayed#}
