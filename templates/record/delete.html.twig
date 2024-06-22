@@ -2,6 +2,7 @@
 
 {% block body %}
 
+<<<<<<< HEAD
 
 
     {{ form_start(Form) }}
@@ -26,6 +27,12 @@
 
 
 
+=======
+    <form method="post" action="{{ path('vinyl_delete') }}">
+        <input type="hidden" name="_method" value="DELETE">
+        {{ form(Form) }}
+    </form>
+>>>>>>> master
 
 
 {% endblock %}

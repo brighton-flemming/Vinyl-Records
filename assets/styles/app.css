@@ -36,8 +36,13 @@ form{
 }
 
 img {
+<<<<<<< HEAD
     width: 400px;
     height: 400px;
+=======
+    width: 600px;
+    height: 600px;
+>>>>>>> master
     border-radius: 3px;
     background: #fff;
 }

@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+<<<<<<< HEAD
 use App\Repository\VinylRepository;
 use App\Service\IdManager;
+=======
+
+>>>>>>> master
 use App\Entity\Vinyl;
 use App\Form\DeleteVinylType;
 use App\Form\VinylType;
@@ -20,7 +24,11 @@ class VinylController extends AbstractController
 {
 
     #[Route('/vinyl/new', name: 'vinyl_new', methods: ['GET','POST'])]
+<<<<<<< HEAD
     public function new_vinyl (Request $request, EntityManagerInterface $entityManager, IdManager $idManager): Response
+=======
+    public function new_vinyl (Request $request, EntityManagerInterface $entityManager): Response
+>>>>>>> master
     {
 
         $Vinyl = new Vinyl();
@@ -29,6 +37,7 @@ class VinylController extends AbstractController
         $Form->handleRequest($request);
         if ($Form->isSubmitted() && $Form->isValid()) {
 
+<<<<<<< HEAD
             $nextId = $idManager->getNextId();
             $Vinyl->setId($nextId);
 
@@ -37,6 +46,11 @@ class VinylController extends AbstractController
 
             return $this->redirectToRoute(route: 'app_vinyl_new_success', parameters: array('id' => $Vinyl->getId()));
 
+=======
+            $entityManager->persist($Vinyl);
+            $entityManager->flush();
+            return $this->redirectToRoute(route: 'app_vinyl_new_success', parameters: array('id' => $Vinyl->getId()));
+>>>>>>> master
         }
 
         return $this->render('record/vinyl_new.html.twig', [
@@ -83,7 +97,10 @@ class VinylController extends AbstractController
 
             return $this->redirectToRoute('app_home' );
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
         }
 
         return $this->render('record/delete.html.twig', [
@@ -93,13 +110,18 @@ class VinylController extends AbstractController
     }
 
     #[Route('/vinyl/show/{id}', name: 'vinyl_show', methods: ['GET'])]
+<<<<<<< HEAD
       public function show(int $id, EntityManagerInterface $entityManager, VinylRepository $vinylRepository): Response
+=======
+      public function show(int $id, EntityManagerInterface $entityManager): Response
+>>>>>>> master
     {
         $vinyl = $entityManager->getRepository(Vinyl::class)->find($id);
 
         if (!$vinyl) {
             throw $this->createNotFoundException('No vinyl found for id ' . $id);
         }
+<<<<<<< HEAD
 
         $nextVinyl = $vinylRepository->findOneBy(['id' => $vinyl->getId() + 1]);
 
@@ -118,6 +140,10 @@ class VinylController extends AbstractController
         'vinyl' => $vinyl,
         'nextVinyl' => $nextVinyl,
         'previousVinyl' => $previousVinyl,
+=======
+    return $this->render('record/show.html.twig', [
+        'vinyl' => $vinyl,
+>>>>>>> master
     ]);
 
 }

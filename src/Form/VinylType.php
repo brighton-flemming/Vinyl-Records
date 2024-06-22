@@ -16,7 +16,12 @@ class VinylType extends  AbstractType
         $builder
             ->add('record_name', TextType::class)
             ->add('record_image', UrlType::class)
+<<<<<<< HEAD
             ->add('artist_name', TextType::class);
+=======
+            ->add('artist_name', TextType::class)
+            ->add('Add', SubmitType::class);
+>>>>>>> master
     }
     public function configureOptions(OptionsResolver $resolver): void
     {
