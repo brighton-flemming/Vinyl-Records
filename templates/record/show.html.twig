@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div>
+        <img src="{{ vinyl.getRecordImage }}" alt="{{ vinyl.getRecordName }}">
+    </div>
+    <div class="details">
+        <p>{{ vinyl.getRecordName }}</p><br>
+        <p>{{ vinyl.getArtistName }}</p><br>
+    </div>
+
+    <button onclick="location.href='{{ path('app_home') }}'">Home</button>
+
+
+{% endblock %}

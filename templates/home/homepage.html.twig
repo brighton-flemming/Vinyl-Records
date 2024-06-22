@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Vinyl Records App{% endblock %}</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+    <div class="alert alert-primary text-center p-5" role="alert">
+        <h1>Vinyl Records</h1>
+        <button class="btn btn-primary" data-target="#addRecordModal" data-toggle="modal" onclick="location.href='{{ path('vinyl_new') }}'">Add Record</button>
+        <button class="btn btn-primary" data-target="#deleteRecordModal" data-toggle="modal" onclick="location.href='{{ path('vinyl_delete') }}'">Delete Record</button>
+    </div>
+    <div class="container text-center block" >
+        <h2>Vinyls </h2>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Record Name</th>
+                <th scope="col">Artist Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for vinyl in Vinyl %}
+                <tr>
+                    <td><a href="{{ path('vinyl_show', {'id': vinyl.getId()}) }}">{{ vinyl.getRecordName() }}</a></td>
+                    <td>{{ vinyl.getArtistName() }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+    </div>
+
+    </body>
+    <div class="flex-container-fluid bg-secondary">
+        <footer class="py-5">
+            <p> Vinyl Records - A vinyl collection management website.</p>
+            <p> Contact - brightflem@gmail.com</p>
+            <p> &copy; 2024 Vinyl Records. All rights reserved.</p>
+        </footer>
+    </div>
+    </html>
+
+
+{% endblock %}
+
+
