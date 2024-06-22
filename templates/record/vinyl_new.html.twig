@@ -2,6 +2,22 @@
 
 {% block body %}
 
-    {{ form(Form) }}
+
+    {{ form_start(Form) }}
+    {{ form_widget(Form) }}
+    <button type="submit" id="addButton">Add</button>
+    {{ form_end(Form) }}
+
+        <script>
+            $("#addButton").click(function() {
+            alert("Record added successfully!")
+            });
+        </script>
+
+    <div class="home">
+        <button onclick="location.href='{{ path('app_home') }}'">Home</button>
+    </div>
+
+
 
 {% endblock %}

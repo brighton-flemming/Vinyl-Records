@@ -6,10 +6,22 @@
         <img src="{{ vinyl.getRecordImage }}" alt="{{ vinyl.getRecordName }}">
     </div>
     <div class="details">
-        <p>{{ vinyl.getRecordName }}</p><br>
-        <p>{{ vinyl.getArtistName }}</p><br>
+        <p id="record_name"><b><label for="record_name">Record name:  </label></b>{{ vinyl.getRecordName }}</p><br>
+        <p id="artist_name"><b><label for="artist_name">Artist name: </label></b>{{ vinyl.getArtistName }}</p><br>
     </div>
 
     <button onclick="location.href='{{ path('app_home') }}'">Home</button>
+
+{#    <button id="homeButton">Home</button>#}
+
+{#    <script>#}
+{#        $(document).ready(function(){#}
+{#            $("#homeButton").click(function(){#}
+{#                alert("Record added successfully!");#}
+{#                location.href='{{ path('app_home') }}';#}
+{#            });#}
+{#        });#}
+{#    </script>#}
+
 
 {% endblock %}

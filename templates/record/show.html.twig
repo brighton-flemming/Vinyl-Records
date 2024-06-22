@@ -6,11 +6,22 @@
         <img src="{{ vinyl.getRecordImage }}" alt="{{ vinyl.getRecordName }}">
     </div>
     <div class="details">
-        <p>{{ vinyl.getRecordName }}</p><br>
-        <p>{{ vinyl.getArtistName }}</p><br>
+        <p id="record_name"><b><label for="record_name">Record name:  </label></b>{{ vinyl.getRecordName }}</p><br>
+        <p id="artist_name"><b><label for="artist_name">Artist name: </label></b>{{ vinyl.getArtistName }}</p><br>
     </div>
 
-    <button onclick="location.href='{{ path('app_home') }}'">Home</button>
+    <div class="previous_record">
+        <button onclick="location.href='{{ path('vinyl_show', {'id': previousVinyl.id}) }}'">Previous record</button>
+    </div>
+
+    <div class="home">
+        <button onclick="location.href='{{ path('app_home') }}'">Home</button>
+    </div>
+
+    <div class="next_record">
+        <button onclick="location.href='{{ path('vinyl_show', {'id': nextVinyl.id}) }}'">Next record</button>
+    </div>
+
 
 
 {% endblock %}

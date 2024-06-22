@@ -17,4 +17,16 @@ class VinylRepository extends ServiceEntityRepository
         parent::__construct($registry, Vinyl::class);
     }
 
+    public function findMaxId(): ?int
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT MAX(e.id)
+            FROM App\Entity\Vinyl e'
+        );
+
+        return $query->getSingleScalarResult();
+    }
+
 }
