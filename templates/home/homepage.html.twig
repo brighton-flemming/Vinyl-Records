@@ -14,7 +14,8 @@
     <div class="alert alert-primary text-center p-5" role="alert">
         <h1>Vinyl Records</h1>
         <button class="btn btn-primary" data-target="#addRecordModal" data-toggle="modal" onclick="location.href='{{ path('vinyl_new') }}'">Add Record</button>
-        <button class="btn btn-primary" data-target="#deleteRecordModal" data-toggle="modal" onclick="location.href='{{ path('vinyl_delete') }}'">Delete Record</button>
+        <button class="btn btn-primary" data-target="#deleteRecordModal" data-toggle="modal" onclick="location.href='{{ path('vinyl_delete') }}'">Delete Record</button><br><br>
+        <button class="btn btn-primary" data-target="#searchRecordModal" data-toggle="modal" onclick="location.href='{{ path('search') }}'">Search</button>
     </div>
     <div class="container text-center block" >
         <h2>Vinyls </h2>
@@ -52,7 +53,7 @@
 {% endblock %}
 
 
-<<<<<<< HEAD
+
 {#
 Add the record_sequence column that will be used when scrolling through the array of records
     Improve the styling
@@ -60,5 +61,4 @@ Add the record_sequence column that will be used when scrolling through the arra
     Add more jquery
 
 #}
-=======
->>>>>>> master
+

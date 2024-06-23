@@ -17,7 +17,7 @@ class VinylRepository extends ServiceEntityRepository
         parent::__construct($registry, Vinyl::class);
     }
 
-<<<<<<< HEAD
+
     public function findMaxId(): ?int
     {
         $entityManager = $this->getEntityManager();
@@ -30,6 +30,14 @@ class VinylRepository extends ServiceEntityRepository
         return $query->getSingleScalarResult();
     }
 
-=======
->>>>>>> master
+    public function search($query)
+    {
+        return $this->createQueryBuilder('v')
+            ->where('v.record_name LIKE :query OR v.artist_name LIKE :query')
+            ->setParameter('query', '%'.$query.'%')
+            ->getQuery()
+            ->getResult();
+    }
+
+
 }

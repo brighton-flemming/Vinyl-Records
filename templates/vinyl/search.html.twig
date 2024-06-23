@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Record Name</th>
+            <th scope="col">Artist Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for vinyl in vinyls %}
+            <tr>
+                <td><a href="{{ path('vinyl_show', {'id': vinyl.getId()}) }}">{{ vinyl.getRecordName() }}</a></td>
+                <td>{{ vinyl.getArtistName() }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="home">
+        <button onclick="location.href='{{ path('app_home') }}'">Home</button>
+    </div>
+
+{% endblock %}

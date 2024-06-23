@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit">Search</button>
+    {{ form_end(form) }}
+
+
+    <div class="home">
+        <button onclick="location.href='{{ path('app_home') }}'">Home</button>
+    </div>
+
+{% endblock %}

@@ -2,8 +2,6 @@
 
 {% block body %}
 
-<<<<<<< HEAD
-
 
     {{ form_start(Form) }}
     {{ form_widget(Form) }}
@@ -24,15 +22,6 @@
     <div class="home">
         <button onclick="location.href='{{ path('app_home') }}'">Home</button>
     </div>
-
-
-
-=======
-    <form method="post" action="{{ path('vinyl_delete') }}">
-        <input type="hidden" name="_method" value="DELETE">
-        {{ form(Form) }}
-    </form>
->>>>>>> master
 
 
 {% endblock %}
