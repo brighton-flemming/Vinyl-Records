@@ -29,7 +29,7 @@
             <tbody>
             {% for vinyl in Vinyl %}
                 <tr>
-                    <td><a href="{{ path('vinyl_show', {'id': vinyl.getId()}) }}">{{ vinyl.getRecordName() }}</a></td>
+                    <td><a href="{{ path('vinyl_show', {'record_sequence': vinyl.getRecordSequence()}) }}">{{ vinyl.getRecordName() }}</a></td>
                     <td>{{ vinyl.getArtistName() }}</td>
                 </tr>
             {% endfor %}

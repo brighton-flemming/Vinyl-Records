@@ -13,8 +13,7 @@ class SearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-           ->add('query', TextType::class, [
-               'required' => true,]);
+           ->add('query', TextType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -39,5 +39,16 @@ class VinylRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    // src/Repository/VinylRepository.php
+
+    public function findOneByRecordSequence($record_sequence): ?Vinyl
+    {
+        return $this->createQueryBuilder('v')
+            ->andWhere('v.record_sequence = :record_sequence')
+            ->setParameter('record_sequence', $record_sequence)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
 
 }

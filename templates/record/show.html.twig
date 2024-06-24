@@ -11,7 +11,7 @@
     </div>
 
     <div class="previous_record">
-        <button onclick="location.href='{{ path('vinyl_show', {'id': previousVinyl.id}) }}'">Previous record</button>
+        <button onclick="location.href='{{ path('vinyl_show', {'record_sequence': previousVinyl.getRecordSequence}) }}'">Previous record</button>
     </div>
 
     <div class="home">
@@ -19,7 +19,7 @@
     </div>
 
     <div class="next_record">
-        <button onclick="location.href='{{ path('vinyl_show', {'id': nextVinyl.id}) }}'">Next record</button>
+        <button onclick="location.href='{{ path('vinyl_show', {'record_sequence': nextVinyl.getRecordSequence}) }}'">Next record</button>
     </div>
 
 

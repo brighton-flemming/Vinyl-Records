@@ -2,22 +2,25 @@
 
 {% block body %}
 
-
+<div class="center-form">
     {{ form_start(Form) }}
     {{ form_widget(Form) }}
     <button type="submit" id="deleteButton">Delete</button>
     {{ form_end(Form) }}
 
 
-        <script>
-            $(document).ready(function(){
-                $("#deleteButton").click(function(event){
-                    if (!confirm("Are you sure you want to delete this vinyl?")) {
-                        event.preventDefault();
-                    }
-                });
+    <script>
+        $(document).ready(function(){
+            $("#deleteButton").click(function(event){
+                if (!confirm("Are you sure you want to delete this vinyl?")) {
+                    event.preventDefault();
+                }
             });
-        </script>
+        });
+    </script>
+
+
+</div>
 
     <div class="home">
         <button onclick="location.href='{{ path('app_home') }}'">Home</button>

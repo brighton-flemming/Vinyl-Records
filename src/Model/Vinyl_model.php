@@ -12,6 +12,7 @@ class VinylModel
         private string $record_image,
         private string $artist_name,
         private date $created_at,
+        private int $record_sequence,
     )
     {
 

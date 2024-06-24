@@ -2,12 +2,14 @@
 
 {% block body %}
 
+    <div class="center-form">
+        {{ form_start(Form) }}
+        {{ form_widget(Form) }}
+        <button type="submit" id="addButton">Add</button>
+        {{ form_end(Form) }}
 
+    </div>
 
-    {{ form_start(Form) }}
-    {{ form_widget(Form) }}
-    <button type="submit" id="addButton">Add</button>
-    {{ form_end(Form) }}
 
         <script>
             $("#addButton").click(function() {

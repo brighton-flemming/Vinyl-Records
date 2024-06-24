@@ -5,7 +5,6 @@ namespace App\Controller;
 
 use App\Form\SearchType;
 use App\Repository\VinylRepository;
-use App\Service\IdManager;
 
 
 use App\Entity\Vinyl;
@@ -24,12 +23,8 @@ class VinylController extends AbstractController
 {
 
     #[Route('/vinyl/new', name: 'vinyl_new', methods: ['GET','POST'])]
-
-
-    public function new_vinyl (Request $request, EntityManagerInterface $entityManager, IdManager $idManager): Response
-
+    public function new_vinyl (Request $request, EntityManagerInterface $entityManager ): Response
     {
-
         $Vinyl = new Vinyl();
         $Vinyl->setCreatedAt(new DateTimeImmutable());
         $Form = $this->createForm(VinylType::class, data: $Vinyl);
@@ -37,14 +32,17 @@ class VinylController extends AbstractController
         if ($Form->isSubmitted() && $Form->isValid()) {
 
 
-            $nextId = $idManager->getNextId();
-            $Vinyl->setId($nextId);
+            $lastRecord = $entityManager->getRepository(Vinyl::class)->findOneBy([], ['record_sequence' => 'desc']);
+            if ($lastRecord) {
+                $Vinyl->setRecordSequence($lastRecord->getRecordSequence() + 1);
+            } else {
+                $Vinyl->setRecordSequence(1);
+            }
 
             $entityManager->persist($Vinyl);
             $entityManager->flush();
 
-            return $this->redirectToRoute(route: 'app_vinyl_new_success', parameters: array('id' => $Vinyl->getId()));
-
+            return $this->redirectToRoute(route: 'app_vinyl_new_success', parameters: array('record_sequence' => $Vinyl->getRecordSequence()));
         }
 
         return $this->render('record/vinyl_new.html.twig', [
@@ -52,17 +50,20 @@ class VinylController extends AbstractController
             'controller_name' => 'VinylController',
         ]);
     }
-    #[Route('/vinyl/new/{id<\d+>}', name: 'app_vinyl_new_success', methods: ['GET'])]
-    public function new_success(int $id, EntityManagerInterface $entityManager): Response
+
+    #[Route('/vinyl/new/{record_sequence}', name: 'app_vinyl_new_success', methods: ['GET', 'POST'])]
+    public function new_success(int $record_sequence, EntityManagerInterface $entityManager): Response
     {
 
-        $Vinyl = $entityManager->getRepository(Vinyl::class)->find($id);
+        $Vinyl = $entityManager->getRepository(Vinyl::class)->find($record_sequence);
 
         if (!$Vinyl) {
             throw $this->createNotFoundException(
-                'No record found for id '.$id
+                'No record found for record sequence '.$record_sequence
             );
         }
+
+
 
         return $this->render('record/vinyl_new_success.html.twig', [
             'vinyl' => $Vinyl,
@@ -92,8 +93,6 @@ class VinylController extends AbstractController
             return $this->redirectToRoute('app_home' );
 
 
-
-
         }
 
         return $this->render('record/delete.html.twig', [
@@ -102,28 +101,28 @@ class VinylController extends AbstractController
 
     }
 
-    #[Route('/vinyl/show/{id}', name: 'vinyl_show', methods: ['GET'])]
+    #[Route('/vinyl/show/{record_sequence}', name: 'vinyl_show', methods: ['GET'])]
 
-      public function show(int $id, EntityManagerInterface $entityManager, VinylRepository $vinylRepository): Response
+      public function show(int $record_sequence, EntityManagerInterface $entityManager, VinylRepository $vinylRepository): Response
 
     {
-        $vinyl = $entityManager->getRepository(Vinyl::class)->find($id);
+        $vinyl = $entityManager->getRepository(Vinyl::class)->find($record_sequence);
 
         if (!$vinyl) {
-            throw $this->createNotFoundException('No vinyl found for id ' . $id);
+            throw $this->createNotFoundException('No vinyl found for record sequence ' . $record_sequence);
         }
 
 
-        $nextVinyl = $vinylRepository->findOneBy(['id' => $vinyl->getId() + 1]);
+        $nextVinyl = $vinylRepository->findOneBy(['record_sequence' => $vinyl->getRecordSequence() + 1]);
 
         if (!$nextVinyl) {
-            $nextVinyl = $vinylRepository->findOneBy([], ['id' => 'ASC']);
+            $nextVinyl = $vinylRepository->findOneBy([], ['record_sequence' => 'ASC']);
         }
 
-        $previousVinyl = $vinylRepository->findOneBy(['id' => $vinyl->getId() - 1]);
+        $previousVinyl = $vinylRepository->findOneBy(['record_sequence' => $vinyl->getRecordSequence() - 1]);
 
         if (!$previousVinyl) {
-            $previousVinyl = $vinylRepository->findOneBy([], ['id' => 'DESC']);
+            $previousVinyl = $vinylRepository->findOneBy([], ['record_sequence' => 'DESC']);
         }
 
 

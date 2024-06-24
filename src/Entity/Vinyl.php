@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 
+
 #[ORM\Entity(repositoryClass: VinylRepository::class)]
 #[ORM\Table(name: "tbl_records")]
 class Vinyl
@@ -28,6 +29,9 @@ class Vinyl
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
+
+    #[ORM\Column]
+    private ?int $record_sequence = null;
 
     public function getId(): ?int
     {
@@ -88,4 +92,17 @@ class Vinyl
 
         return $this;
     }
+
+    public function getRecordSequence(): ?int
+    {
+        return $this->record_sequence;
+    }
+
+    public function setRecordSequence(int $record_sequence): static
+    {
+        $this->record_sequence = $record_sequence;
+
+        return $this;
+    }
+
 }
