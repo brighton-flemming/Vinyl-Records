@@ -44,6 +44,7 @@ class AssignRecordSequenceCommand extends Command
 
         $output->writeln('Record sequence values have been assigned.');
 
+
         return Command::SUCCESS;
     }
 }
